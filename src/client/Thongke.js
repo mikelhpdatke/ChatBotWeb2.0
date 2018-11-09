@@ -1,5 +1,60 @@
 import React, { Component } from "react";
 import "./Card.css";
+import { Modal, Button } from 'antd';
+
+class ModelTrainning extends Component {
+  state = {
+    ModalText: 'Các câu hỏi mới sẽ được huấn luyện',
+    visible: false,
+    confirmLoading: false,
+  }
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
+
+  handleOk = () => {
+    this.setState({
+      ModalText: 'Các câu hỏi mới sẽ được huấn luyện',
+      confirmLoading: true,
+    });
+    setTimeout(() => {
+      this.setState({
+        visible: false,
+        confirmLoading: false,
+      });
+    }, 5000);
+  }
+
+  handleCancel = () => {
+    console.log('Clicked cancel button');
+    this.setState({
+      visible: false,
+    });
+  }
+
+  render() {
+    const { visible, confirmLoading, ModalText } = this.state;
+    return (
+      <div>
+        <Button type="primary" onClick={this.showModal}>
+          Train
+        </Button>
+        <Modal title="Chú ý"
+          visible={visible}
+          onOk={this.handleOk}
+          confirmLoading={confirmLoading}
+          onCancel={this.handleCancel}
+        >
+          <p>{ModalText}</p>
+        </Modal>
+      </div>
+    );
+  }
+}
+
 class ThongKe extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +78,7 @@ class ThongKe extends Component {
   }
 
   handleSubmit(e){
-      
+      ModelTrainning();
       e.preventDefault();
   }
   render() {
@@ -48,13 +103,8 @@ class ThongKe extends Component {
         </div>
 
         <div class="d-flex justify-content-center">
-          <button
-            type="button"
-            class="btn btn-outline-success"
-            onClick={this.handleSubmit}
-          >
-            Train
-          </button>
+          <ModelTrainning/>
+          
         </div>
       </div>
     );

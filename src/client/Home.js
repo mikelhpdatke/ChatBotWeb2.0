@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {  notification, Icon } from 'antd';
+import { Checkbox } from 'antd';
 
 
 const openNotification = () => {
@@ -140,7 +141,7 @@ const checkboxes = [
     label: "Check Box 4"
   }
 ];
-
+/*
 const Checkbox = ({ type = "checkbox", name, checked = false, onChange }) => (
   <input type={type} name={name} checked={checked} onChange={onChange} />
 );
@@ -151,7 +152,7 @@ Checkbox.propTypes = {
   checked: PropTypes.bool,
   onChange: PropTypes.func.isRequired
 };
-
+*/
 class CheckboxContainer extends Component {
   constructor(props) {
     super(props);
@@ -183,6 +184,8 @@ class CheckboxContainer extends Component {
                         return (         
                                 
                                     <div class="col-6" style={{height:45}}>      
+                              
+                                      
                                         <div class="checkbox">
                                         <label key={item.key}>
                                             <Checkbox

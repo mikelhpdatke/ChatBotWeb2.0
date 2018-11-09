@@ -5,7 +5,7 @@ const Menu = () => (
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <NavLink
-        style={{ color: "black", fontWeight: "bold" }}
+        style={{ color: "black", fontWeight: "bold", fontSize:"18px" }}
         className="nav-item nav-link"
         exact
         to="/"
@@ -18,7 +18,7 @@ const Menu = () => (
         Trang chủ{" "}
       </NavLink>
       <NavLink
-        style={{ color: "black", fontWeight: "bold" }}
+        style={{ color: "black", fontWeight: "bold", fontSize:"18px" }}
         className="nav-item nav-link"
         to="/thongke"
         activeStyle={{
