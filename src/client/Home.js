@@ -67,7 +67,7 @@ class AskAns extends Component {
     //console.log(this.props);
 
     return (
-      <div class="col">
+      <div class="col-6">
         <div class="form-group">
           <label for="comment" style={{ color: "black", fontWeight: "bold" }}>
             Câu hỏi:
@@ -328,7 +328,8 @@ class PageNumber extends Component {
   render() {
     return (
       <div style={{fontWeight:'bold', fontSize:'15px'}}>
-        Câu số: {this.state.cur + 1} / {this.state.max}
+        Số câu chưa trả lời: {this.state.max} <br/>
+        Đang xử lý câu: {this.state.cur + 1} / {this.state.max}
       </div>
     )
   }
@@ -436,7 +437,7 @@ class Home extends Component {
           />
           <PageNumber cur={this.state.data.pos} max={this.state.data.arr.length}/>
         </div>
-        <br />
+       
         <div class="row justify-content-around">
           <button
             type="button"

@@ -15,7 +15,7 @@ const Menu = () => (
           textDecoration: "underline"
         }}
       >
-        Trang chủ{" "}
+        Nhập liệu{" "}
       </NavLink>
       <NavLink
         style={{ color: "black", fontWeight: "bold", fontSize:"18px" }}
