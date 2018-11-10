@@ -309,6 +309,30 @@ async function HuanFetch(url, json) {
       console.debug(error);
     });
 }
+
+class PageNumber extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      cur:this.props.cur,
+      max:this.props.max
+    }
+  }
+  
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      cur:nextProps.cur,
+      max:nextProps.max
+    })
+  }
+  render() {
+    return (
+      <div style={{fontWeight:'bold', fontSize:'15px'}}>
+        Câu số: {this.state.cur + 1} / {this.state.max}
+      </div>
+    )
+  }
+}
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -410,6 +434,7 @@ class Home extends Component {
             onChange={this.handleChange}
             CheckedProp={this.state.data.arr[pos].Checked}
           />
+          <PageNumber cur={this.state.data.pos} max={this.state.data.arr.length}/>
         </div>
         <br />
         <div class="row justify-content-around">
