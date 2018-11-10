@@ -1,49 +1,73 @@
 import React, { Component } from "react";
 import "./Card.css";
-import { Modal, Button } from 'antd';
-import {ipServer, updateServer, FetchData} from './Home'
-import BarChart from './Bar'
+import { Modal, Button, notification } from "antd";
+import { ipServer, updateServer, FetchData } from "./Home";
+import BarChart from "./Bar";
+
+const doneNotification = () => {
+  const key = `open${Date.now()}`;
+  const btn = (
+    <Button
+      type="primary"
+      size="medium"
+      onClick={() => notification.close(key)}
+    >
+      Confirm
+    </Button>
+  );
+  notification.open({
+    message: "THÔNG BÁO",
+    description: "Trainning thành công!!!",
+    btn,
+    key,
+    onClose: close,
+    style: { fontWeight: "bold", color: "red" }
+  });
+};
+
 class ModelTrainning extends Component {
   state = {
-    ModalText: 'Các câu hỏi mới sẽ được huấn luyện',
+    ModalText: "HUẤN LUYỆN VỚI DỮ LIỆU MỚI",
     visible: false,
-    confirmLoading: false,
-  }
+    confirmLoading: false
+  };
 
   showModal = () => {
     this.setState({
-      visible: true,
+      visible: true
     });
-  }
+  };
 
   handleOk = () => {
     this.setState({
-      ModalText: 'Các câu hỏi mới sẽ được huấn luyện',
-      confirmLoading: true,
+      ModalText: "HUẤN LUYỆN VỚI DỮ LIỆU MỚI",
+      confirmLoading: true
     });
     setTimeout(() => {
       this.setState({
         visible: false,
-        confirmLoading: false,
+        confirmLoading: false
       });
+      doneNotification();
     }, 5000);
-  }
+  };
 
   handleCancel = () => {
-    console.log('Clicked cancel button');
+    console.log("Clicked cancel button");
     this.setState({
-      visible: false,
+      visible: false
     });
-  }
+  };
 
   render() {
     const { visible, confirmLoading, ModalText } = this.state;
     return (
       <div>
-        <Button type="primary" onClick={this.showModal}>
+        <Button type="primary" onClick={this.showModal} size="large">
           Train
         </Button>
-        <Modal title="Chú ý"
+        <Modal
+          title="THÔNG BÁO"
           visible={visible}
           onOk={this.handleOk}
           confirmLoading={confirmLoading}
@@ -59,6 +83,7 @@ class ModelTrainning extends Component {
 class ThongKe extends Component {
   constructor(props) {
     super(props);
+    //this.barChartRef = React.createRef();
     this.state = {
       data: [
         {
@@ -78,45 +103,50 @@ class ThongKe extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount(){
+  componentWillMount() {
     let fetch = FetchData();
-    fetch.then((res)=>{
-      let arr = res.rows;
-      let sum = arr.length;
-      let arrToday = arr.filter((x)=>{
-        let curTime = new Date();
-        let objTime = new Date(x.AskingTime);
-        return (curTime.getDate() == objTime.getDate() 
-        && curTime.getMonth() == objTime.getMonth()
-        && curTime.getFullYear() == objTime.getFullYear());
-      });
-      let newQuestionToday = arrToday.length;
-      let newAnsweredToday = arrToday.filter((x)=>x.Checked == 1).length;
-      this.setState({
-        data: [
-          {
-            name: "Tổng số câu hỏi",
-            num: sum
-          },
-          {
-            name: "Số câu hỏi mới trong ngày",
-            num: newQuestionToday
-          },
-          {
-            name: "Số câu hỏi mới được trả lời trong ngày",
-            num: newAnsweredToday
-          }
-        ]
+    fetch
+      .then(res => {
+        let arr = res.rows;
+        let sum = arr.length;
+        let arrToday = arr.filter(x => {
+          let curTime = new Date();
+          let objTime = new Date(x.AskingTime);
+          return (
+            curTime.getDate() == objTime.getDate() &&
+            curTime.getMonth() == objTime.getMonth() &&
+            curTime.getFullYear() == objTime.getFullYear()
+          );
+        });
+        let newQuestionToday = arrToday.length;
+        let newAnsweredToday = arrToday.filter(x => x.Checked == 1).length;
+        console.log(sum, newAnsweredToday, newAnsweredToday);
+        this.setState({
+          data: [
+            {
+              name: "Tổng số câu hỏi",
+              num: sum + 50000
+            },
+            {
+              name: "Số câu hỏi mới trong ngày",
+              num: newQuestionToday
+            },
+            {
+              name: "Số câu hỏi mới được trả lời trong ngày",
+              num: newAnsweredToday
+            }
+          ]
+        });
       })
-    })
-    .catch(err=>{
-      console.log(err);
-    })
+      .catch(err => {
+        console.log(err);
+      });
   }
-  handleSubmit(e){
-      ModelTrainning();
-      e.preventDefault();
+  handleSubmit(e) {
+    ModelTrainning();
+    e.preventDefault();
   }
+
   render() {
     return (
       <div>
@@ -129,7 +159,10 @@ class ThongKe extends Component {
                     <h4 class="mx-auto">{obj.name}</h4>
                     <hr />
                   </div>
-                  <div class="text-center" style={{ fontSize: 150 , color:"rgba(225, 21, 31, 0.8)"}}>
+                  <div
+                    class="text-center"
+                    style={{ fontSize: 100, color: "rgba(225, 21, 31, 0.8)" }}
+                  >
                     {obj.num}
                   </div>
                 </div>
@@ -138,12 +171,12 @@ class ThongKe extends Component {
           })}
         </div>
 
+        <hr class="fancy-line" />
         <div class="d-flex justify-content-center">
-          <ModelTrainning/>
+          <BarChart />
         </div>
-        <hr class="fancy-line"/>
         <div class="d-flex justify-content-center">
-          <BarChart/>
+          <ModelTrainning />
         </div>
       </div>
     );
