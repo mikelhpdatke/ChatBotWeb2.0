@@ -244,7 +244,7 @@ class CheckboxContainer extends Component {
   render() {
     let dem = 0;
     return (
-      <div class="col mx-auto" style={{ marginTop: "40px", color: "black" }}>
+      <div class="col-6 mx-auto" style={{ marginTop: "40px", color: "black" }}>
         <div class="row">
           {checkboxes.map(item => {
             //console.log(dem++);
