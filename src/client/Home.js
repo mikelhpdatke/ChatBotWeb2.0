@@ -439,13 +439,11 @@ class Home extends Component {
         </div>
        
         <div class="row justify-content-around">
-          <button
-            type="button"
-            class="btn btn-outline-success"
-            onClick={this.handleSubmit}
-          >
-            Submit
-          </button>
+          
+
+          <Button type="primary" onClick={this.handleSubmit} size="medium">
+          Submit
+        </Button>
         </div>
       </div>
     );
