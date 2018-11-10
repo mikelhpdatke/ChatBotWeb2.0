@@ -25,8 +25,8 @@ const openNotification = () => {
     style:{fontWeight:'bold',  color:'red'}
   });
 };
-const ipServer = "http://172.104.41.68:5060/select";
-const updateServer = "http://172.104.41.68:5060/update";
+export const ipServer = "http://172.104.41.68:5060/select";
+export const updateServer = "http://172.104.41.68:5060/update";
 
 
 class AskAns extends Component {
@@ -270,7 +270,7 @@ class CheckboxContainer extends Component {
   }
 }
 
-const FetchData = async () => {
+export const FetchData = async () => {
   const rawResponse = await fetch(ipServer, {
     method: "POST",
     headers: {

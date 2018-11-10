@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Card.css";
 import { Modal, Button } from 'antd';
+import {ipServer, updateServer, FetchData} from './Home'
 
 class ModelTrainning extends Component {
   state = {
@@ -61,15 +62,15 @@ class ThongKe extends Component {
     this.state = {
       data: [
         {
-          name: "Số chủ đề",
+          name: "Tổng số câu hỏi",
           num: 12
         },
         {
-          name: "Số câu hỏi hiện có",
+          name: "Số câu hỏi mới trong ngày",
           num: 12
         },
         {
-          name: "Số câu hỏi mới",
+          name: "Số câu hỏi mới được trả lời trong ngày",
           num: 40
         }
       ]
@@ -77,6 +78,41 @@ class ThongKe extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillMount(){
+    let fetch = FetchData();
+    fetch.then((res)=>{
+      let arr = res.rows;
+      let sum = arr.length;
+      let arrToday = arr.filter((x)=>{
+        let curTime = new Date();
+        let objTime = new Date(x.AskingTime);
+        return (curTime.getDate() == objTime.getDate() 
+        && curTime.getMonth() == objTime.getMonth()
+        && curTime.getFullYear() == objTime.getFullYear());
+      });
+      let newQuestionToday = arrToday.length;
+      let newAnsweredToday = arrToday.filter((x)=>x.Checked == 1).length;
+      this.setState({
+        data: [
+          {
+            name: "Tổng số câu hỏi",
+            num: sum
+          },
+          {
+            name: "Số câu hỏi mới trong ngày",
+            num: newQuestionToday
+          },
+          {
+            name: "Số câu hỏi mới được trả lời trong ngày",
+            num: newAnsweredToday
+          }
+        ]
+      })
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
   handleSubmit(e){
       ModelTrainning();
       e.preventDefault();
