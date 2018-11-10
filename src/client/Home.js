@@ -3,16 +3,31 @@ import PropTypes from "prop-types";
 import { notification, Icon } from "antd";
 import { Checkbox } from "antd";
 
-const ipServer = "http://172.104.41.68:5060/select";
-const updateServer = "http://172.104.41.68:5060/update";
+import { Button } from 'antd';
+
+const close = () => {
+  console.log('Notification was closed. Either the close button was clicked or duration time elapsed.');
+};
+
 const openNotification = () => {
+  const key = `open${Date.now()}`;
+  const btn = (
+    <Button type="primary" size="medium" onClick={() => notification.close(key)}>
+      Confirm
+    </Button>
+  );
   notification.open({
-    message: "Notification Title",
-    description:
-      "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
-    icon: <Icon type="smile" style={{ color: "#108ee9" }} />
+    message: 'Chú ý',
+    description: 'Bạn đã nhập xong tất cả các câu hỏi, hay chuyển sang Tab Thống Kê để Trainning',
+    btn,
+    key,
+    onClose: close,
+    style:{fontWeight:'bold',  color:'red'}
   });
 };
+const ipServer = "http://172.104.41.68:5060/select";
+const updateServer = "http://172.104.41.68:5060/update";
+
 
 class AskAns extends Component {
   constructor(props) {
@@ -156,18 +171,7 @@ const checkboxes = [
     label: "14"
   }
 ];
-/*
-const Checkbox = ({ type = "checkbox", name, checked = false, onChange }) => (
-  <input type={type} name={name} checked={checked} onChange={onChange} />
-);
 
-Checkbox.propTypes = {
-  type: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  checked: PropTypes.bool,
-  onChange: PropTypes.func.isRequired
-};
-*/
 class CheckboxContainer extends Component {
   constructor(props) {
     super(props);
@@ -281,45 +285,29 @@ const FetchData = async () => {
   return content;
 };
 
-const PushData = async (ip, json) => {
-  console.log(ip, json);
-  const rawResponse = await fetch(ip, {
+async function HuanFetch(url, json) {
+  const myRequest = new Request(url, {
     method: "POST",
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({json})
+    body: JSON.stringify(json)
   });
-  const content = await rawResponse.json();
-  //console.log('wtfffffffffffffffffffff');
-  console.log(content);
-  return content;
-};
-
-async function HuanFetch(url, json) {
-	const myRequest = new Request(url, {
-		method: "POST",
-		headers: {
-			Accept: "application/json",
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify(json)
-	});
-	return await fetch(myRequest)
-		.then(response => {
-			if (response.status === 200) {
-				return response.json();
-			} else {
-				console.debug("Something went wrong on api server!");
-			}
-		})
-		.then(response => {
-			return response;
-		})
-		.catch(error => {
-			console.debug(error);
-		});
+  return await fetch(myRequest)
+    .then(response => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        console.debug("Something went wrong on api server!");
+      }
+    })
+    .then(response => {
+      return response;
+    })
+    .catch(error => {
+      console.debug(error);
+    });
 }
 class Home extends Component {
   constructor(props) {
@@ -365,23 +353,27 @@ class Home extends Component {
     this.setState({
       data: newData
     });
-    
+
     console.log(newData);
   }
   handleSubmit(e) {
     //alert(this.state);
     //openNotification();
     let pos = this.state.data.pos;
-    HuanFetch(updateServer,{
-      'IdQuestion':this.state.data.arr[pos].IdQuestion,
-      'Answer':this.state.data.arr[pos].Answer,
-      'Topic':this.state.data.arr[pos].Topic
-    }).then(ans=>{
+    /*
+    HuanFetch(updateServer, {
+      IdQuestion: this.state.data.arr[pos].IdQuestion,
+      Answer: this.state.data.arr[pos].Answer,
+      Topic: this.state.data.arr[pos].Topic
+    }).then(ans => {
       console.log(ans);
     });
+    */
     let nextPos = this.state.data.pos + 1;
     //console.log()
     if (this.state.data.pos === this.state.data.arr.length - 1) {
+      // alert
+      openNotification();
     } else {
       //nextPos = 0;
       this.setState(() => ({
