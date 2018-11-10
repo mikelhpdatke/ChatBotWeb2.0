@@ -132,8 +132,8 @@ class BarChart extends Component {
     //console.log('wtf');
     return (
       <div>
-        <h2>Thống kê dữ liệu 10 ngày gần nhất</h2>
-        <Bar data={this.state} width={500} height={400} options={options} />
+        <div style={{fontSize:'20px', textAlign:'center', fontWeight:'bold'}}>Thống kê dữ liệu 10 ngày gần nhất</div>
+        <Bar data={this.state} width={500} height={300} options={options} />
       </div>
     );
   }

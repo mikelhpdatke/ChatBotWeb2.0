@@ -2,8 +2,8 @@ h4 {
   text-align: center;
   background-color: rgba(45, 45, 45, 0.1);
   padding: 12px;
-  font-size: 22px;
-  height: 68px;
+  font-size: 21px;
+  height: 50px;
   margin:auto 
 }
 
@@ -20,16 +20,16 @@ p {
   width: 330px;
   border: 3px solid rgb(131, 167, 233);
   border-radius: 20px;
-  margin: 10px 5px;
+  margin: 5px 5px;
   padding: 4px;
 }
 
 .cardContent {
-  padding: 10px;
+  padding: 2px;
 }
 
 .cardText {
-  margin-bottom: 30px;
+  margin-top: 0px;
 }
 
 hr.fancy-line { 

@@ -95,7 +95,7 @@ class ThongKe extends Component {
           num: 12
         },
         {
-          name: "Số câu hỏi mới được trả lời trong ngày",
+          name: "Số câu hỏi mới đã trả lời",
           num: 40
         }
       ]
@@ -132,7 +132,7 @@ class ThongKe extends Component {
               num: newQuestionToday
             },
             {
-              name: "Số câu hỏi mới được trả lời trong ngày",
+              name: "Số câu hỏi mới đã trả lời",
               num: newAnsweredToday
             }
           ]
@@ -157,11 +157,11 @@ class ThongKe extends Component {
                 <div className="cardContent">
                   <div className="cardText">
                     <h4 class="mx-auto">{obj.name}</h4>
-                    <hr />
+                    <hr style={{marginTop:'5px', marginBottom:'5px'}}/>
                   </div>
                   <div
                     class="text-center"
-                    style={{ fontSize: 100, color: "rgba(225, 21, 31, 0.8)" }}
+                    style={{ fontSize: "45px", color: "rgba(225, 21, 31, 0.8)" }}
                   >
                     {obj.num}
                   </div>
