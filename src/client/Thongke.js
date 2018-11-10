@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Card.css";
 import { Modal, Button } from 'antd';
 import {ipServer, updateServer, FetchData} from './Home'
-
+import BarChart from './Bar'
 class ModelTrainning extends Component {
   state = {
     ModalText: 'Các câu hỏi mới sẽ được huấn luyện',
@@ -126,10 +126,10 @@ class ThongKe extends Component {
               <div className="fullCard" id="thumbnail">
                 <div className="cardContent">
                   <div className="cardText">
-                    <h4>{obj.name}</h4>
+                    <h4 class="mx-auto">{obj.name}</h4>
                     <hr />
                   </div>
-                  <div class="text-center" style={{ fontSize: 150 }}>
+                  <div class="text-center" style={{ fontSize: 150 , color:"rgba(225, 21, 31, 0.8)"}}>
                     {obj.num}
                   </div>
                 </div>
@@ -140,7 +140,10 @@ class ThongKe extends Component {
 
         <div class="d-flex justify-content-center">
           <ModelTrainning/>
-          
+        </div>
+        <hr class="fancy-line"/>
+        <div class="d-flex justify-content-center">
+          <BarChart/>
         </div>
       </div>
     );

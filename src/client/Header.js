@@ -49,6 +49,7 @@ class Header extends Component {
           <Menu />
         </nav>
         <hr style={{ color: "#f00", backgroundColor: "#f00", height: "2px", marginTop:'0px' }} />
+        <hr class="fancy-line"/>
       </div>
     );
   }

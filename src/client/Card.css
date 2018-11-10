@@ -1,29 +1,68 @@
 h4 {
-    text-align: center;
-    background-color: rgba(45, 45, 45, 0.1);
-    padding: 10px;
-    font-size: 27px;
-  }
-  p {
-    text-align: justify;
-  }
-  .links {
-    text-align: left;
-    color: black;
-  }
-  
-  
-  
-  .fullCard {
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px 5px;
-    padding: 4px;
-  }
-  .cardContent {
-    padding: 10px;
-  }
-  .cardText {
-    margin-bottom: 30px;
-  }
+  text-align: center;
+  background-color: rgba(45, 45, 45, 0.1);
+  padding: 12px;
+  font-size: 22px;
+  height: 68px;
+  margin:auto 
+}
+
+p {
+  text-align: justify;
+}
+
+.links {
+  text-align: left;
+  color: black;
+}
+
+.fullCard {
+  width: 330px;
+  border: 3px solid rgb(131, 167, 233);
+  border-radius: 20px;
+  margin: 10px 5px;
+  padding: 4px;
+}
+
+.cardContent {
+  padding: 10px;
+}
+
+.cardText {
+  margin-bottom: 30px;
+}
+
+hr.fancy-line { 
+  border: 0; 
+  height: 1px;
+  position: relative;
+  margin: 0.5em 0; /* Keep other elements away from pseudo elements*/
+}
+hr.fancy-line:before {
+  top: -0.5em;
+  height: 1em;
+}
+hr.fancy-line:after {
+  content:'';
+  height: 0.5em;   /* half the height of :before */
+  top: 1px;        /* height of hr*/
+}
+
+hr.fancy-line:before, hr.fancy-line:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+}
+
+hr.fancy-line, hr.fancy-line:before {
+  background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 75%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 75%, color-stop(0%,rgba(0,0,0,0.1)), color-stop(75%,rgba(0,0,0,0)));
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 75%);
+  background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 75%);
+  background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 75%);
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 75%);
+}
+
+body, hr.fancy-line:after {
+  background: #f4f4f4;
+}
