@@ -165,7 +165,7 @@ class Login extends Component {
     return (
     <div className="body">
       <div style={style.login}>
-        <h1 style={style.login_h1}>Login</h1>
+        <h1 style={style.login_h1}>PTIT ChatBot</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
@@ -188,7 +188,7 @@ class Login extends Component {
             
             class="btn btn-primary btn-block btn-large"
           >
-            Let me in.
+            Login
           </button>
         </form>
       </div>

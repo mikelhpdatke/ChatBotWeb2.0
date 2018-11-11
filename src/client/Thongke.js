@@ -101,9 +101,10 @@ class ThongKe extends Component {
       ]
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleData = this.handleData.bind(this);
   }
 
-  componentWillMount() {
+  handleData(){
     let fetch = FetchData();
     fetch
       .then(res => {
@@ -142,6 +143,17 @@ class ThongKe extends Component {
         console.log(err);
       });
   }
+  componentWillMount() {
+    this.handleData();
+    this.myInterval = setInterval(()=>{
+      this.handleData();
+    }, 3000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.myInterval);
+  }
+  
   handleSubmit(e) {
     ModelTrainning();
     e.preventDefault();
