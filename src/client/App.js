@@ -6,13 +6,14 @@ import { Link } from "react-router-dom";
 import Home from "./Home";
 import ThongKe from "./Thongke";
 import Login from "./Login";
-
+import HomeEmailManager from './HomeEmailManager'
 const Main = () => (
   <main>
     <Switch>
       <Route exact path="/" component={Home} />
 
       <Route path="/thongke" component={() => <ThongKe />} />
+      <Route path="/emailManager" component={HomeEmailManager} />
     </Switch>
   </main>
 );
@@ -27,6 +28,7 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  
   handleSubmit(user, pass) {
     console.log(user, pass);
     if (user == this.state.user && pass == this.state.pass) {

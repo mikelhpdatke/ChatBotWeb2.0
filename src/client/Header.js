@@ -29,6 +29,18 @@ const Menu = () => (
       >
         Thống kê
       </NavLink>
+      <NavLink
+        style={{ color: "black", fontWeight: "bold", fontSize:"18px" }}
+        className="nav-item nav-link"
+        to="/emailManager"
+        activeStyle={{
+          fontWeight: "bold",
+          color: "red",
+          textDecoration: "underline"
+        }}
+      >
+        Gửi Email
+      </NavLink>
     </div>
   </div>
 );
