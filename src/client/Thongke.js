@@ -88,15 +88,15 @@ class ThongKe extends Component {
       data: [
         {
           name: "Tổng số câu hỏi",
-          num: 12
+          num: 0
         },
         {
           name: "Số câu hỏi mới trong ngày",
-          num: 12
+          num: 0
         },
         {
           name: "Số câu hỏi mới đã trả lời",
-          num: 40
+          num: 0
         }
       ]
     };
