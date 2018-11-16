@@ -385,15 +385,16 @@ class Home extends Component {
     //alert(this.state);
     //openNotification();
     let pos = this.state.data.pos;
-    /*
+    
     HuanFetch(updateServer, {
       IdQuestion: this.state.data.arr[pos].IdQuestion,
       Answer: this.state.data.arr[pos].Answer,
       Topic: this.state.data.arr[pos].Topic
     }).then(ans => {
+      console.log('Success');
       console.log(ans);
     });
-    */
+    
     let nextPos = this.state.data.pos + 1;
     //console.log()
     if (this.state.data.pos === this.state.data.arr.length - 1) {
