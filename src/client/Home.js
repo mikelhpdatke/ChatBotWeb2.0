@@ -27,7 +27,7 @@ const openNotification = () => {
 };
 export const ipServer = "http://172.104.41.68:5060/select";
 export const updateServer = "http://172.104.41.68:5060/update";
-
+export const deleteServer ="";
 
 class AskAns extends Component {
   constructor(props) {
@@ -285,7 +285,7 @@ export const FetchData = async () => {
   return content;
 };
 
-async function HuanFetch(url, json) {
+export async function HuanFetch(url, json) {
   const myRequest = new Request(url, {
     method: "POST",
     headers: {
@@ -354,6 +354,8 @@ class Home extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleIgnore = this.handleIgnore.bind(this);
   }
 
   componentWillMount() {
@@ -412,6 +414,54 @@ class Home extends Component {
     //console.log(this.state);
     e.preventDefault();
   }
+
+  handleDelete(e){
+    let pos = this.state.data.pos;
+    HuanFetch(deleteServer, {
+      IdQuestion: this.state.data.arr[pos].IdQuestion,
+      Answer: this.state.data.arr[pos].Answer,
+      Topic: this.state.data.arr[pos].Topic
+    }).then(ans => {
+      console.log('Success');
+      console.log(ans);
+    });
+    let nextPos = this.state.data.pos + 1;
+    //console.log()
+    if (this.state.data.pos === this.state.data.arr.length - 1) {
+      // alert
+      openNotification();
+    } else {
+      //nextPos = 0;
+      this.setState(() => ({
+        data: {
+          pos: nextPos,
+          arr: this.state.data.arr
+        }
+      }));
+    }
+    //console.log(this.state);
+    e.preventDefault();
+  }
+
+  handleIgnore(e){
+    let pos = this.state.data.pos;
+    let nextPos = this.state.data.pos + 1;
+    //console.log()
+    if (this.state.data.pos === this.state.data.arr.length - 1) {
+      // alert
+      openNotification();
+    } else {
+      //nextPos = 0;
+      this.setState(() => ({
+        data: {
+          pos: nextPos,
+          arr: this.state.data.arr
+        }
+      }));
+    }
+    //console.log(this.state);
+    e.preventDefault();
+  }
   render() {
     let pos = this.state.data.pos;
     let Question = "";
@@ -442,8 +492,18 @@ class Home extends Component {
         <div class="row justify-content-around">
           
 
-          <Button type="primary" onClick={this.handleSubmit} size="medium">
-          Submit
+          <Button name='submit' type="primary" onClick={this.handleSubmit} size="medium">
+          Lưu
+        </Button>
+      
+
+
+         <Button name='delete' type="danger" onClick={this.handleSubmit} size="medium">
+          Xoá 
+        </Button>
+
+        <Button name='ignore' type="default" onClick={this.handleIgnore} size="medium">
+          Bỏ qua 
         </Button>
         </div>
       </div>

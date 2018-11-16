@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Collapse } from "react-collapse";
-
+import {HuanFetch, FetchData} from './Home'
 class AskAns extends Component {
   constructor(props) {
     super(props);
