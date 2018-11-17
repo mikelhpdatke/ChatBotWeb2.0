@@ -27,7 +27,7 @@ const openNotification = () => {
 };
 export const ipServer = "http://172.104.41.68:5060/select";
 export const updateServer = "http://172.104.41.68:5060/update";
-export const deleteServer ="";
+export const deleteServer ="http://172.104.41.68:5060/del";
 
 class AskAns extends Component {
   constructor(props) {
@@ -67,29 +67,27 @@ class AskAns extends Component {
     //console.log(this.props);
 
     return (
-      <div class="col-6">
-        <div class="form-group">
-          <label for="comment" style={{ color: "black", fontWeight: "bold" }}>
+      <div className="col-6">
+        <div className="form-group">
+          <label style={{ color: "black", fontWeight: "bold" }}>
             Câu hỏi:
           </label>
           <textarea
             name="Question"
-            class="form-control"
+            className="form-control"
             rows="4"
-            id="comment"
             value={this.state.Question}
             onChange={this.handleChange}
           />
           <br />
           <br />
-          <label for="comment" style={{ color: "black", fontWeight: "bold" }}>
+          <label style={{ color: "black", fontWeight: "bold" }}>
             Câu trả lời:
           </label>
           <textarea
             name="Answer"
-            class="form-control"
+            className="form-control"
             rows="9"
-            id="comment"
             value={this.state.Answer}
             onChange={this.handleChange}
           />
@@ -244,15 +242,15 @@ class CheckboxContainer extends Component {
   render() {
     let dem = 0;
     return (
-      <div class="col-6 mx-auto" style={{ marginTop: "40px", color: "black" }}>
-        <div class="row">
-          {checkboxes.map(item => {
-            //console.log(dem++);
+      <div className="col-6 mx-auto" style={{ marginTop: "40px", color: "black" }}>
+        <div className="row">
+          {checkboxes.map((item, index) => {
+            //console.log(index);
             dem++;
             return (
-              <div class="col-6" style={{ height: 45 }}>
-                <div class="checkbox">
-                  <label key={item.key}>
+              <div className="col-6" style={{ height: 45 }} key={index}>
+                <div className="checkbox">
+                  <label>
                     <Checkbox
                       name={item.label}
                       checked={this.state.checkedItems.get(item.label)}
@@ -361,6 +359,8 @@ class Home extends Component {
   componentWillMount() {
     let content = FetchData();
     content.then(content => {
+      console.log(content);
+      if ('rows' in content)
       this.setState(() => ({
         data: {
           pos: 0,
@@ -419,10 +419,8 @@ class Home extends Component {
     let pos = this.state.data.pos;
     HuanFetch(deleteServer, {
       IdQuestion: this.state.data.arr[pos].IdQuestion,
-      Answer: this.state.data.arr[pos].Answer,
-      Topic: this.state.data.arr[pos].Topic
     }).then(ans => {
-      console.log('Success');
+      console.log('Delete Success');
       console.log(ans);
     });
     let nextPos = this.state.data.pos + 1;
@@ -475,8 +473,8 @@ class Home extends Component {
     //console.log(pos + 'wtffffff'+this.state.data.arr[pos].Checked);
     //let arrCheckBoxs = this.state.data.arr[pos].Topic;
     return (
-      <div class="container">
-        <div class="row justify-content-between">
+      <div className="container">
+        <div className="row justify-content-between">
           <AskAns
             onChange={this.handleChange}
             Question={Question}
@@ -489,20 +487,20 @@ class Home extends Component {
           <PageNumber cur={this.state.data.pos} max={this.state.data.arr.length}/>
         </div>
        
-        <div class="row justify-content-around">
+        <div className="row justify-content-around">
           
 
-          <Button name='submit' type="primary" onClick={this.handleSubmit} size="medium">
+          <Button name='submit' type="primary" onClick={this.handleSubmit} size="default">
           Lưu
         </Button>
       
 
 
-         <Button name='delete' type="danger" onClick={this.handleSubmit} size="medium">
+         <Button name='delete' type="danger" onClick={this.handleSubmit} size="default">
           Xoá 
         </Button>
 
-        <Button name='ignore' type="default" onClick={this.handleIgnore} size="medium">
+        <Button name='ignore' type="default" onClick={this.handleIgnore} size="default">
           Bỏ qua 
         </Button>
         </div>

@@ -1,6 +1,20 @@
 import React, { Component } from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
-
+const ipGetEmails = "http://172.104.41.68:5060/getEmail";
+const FetchData = async (ip) => {
+  const rawResponse = await fetch(ip, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({})
+  });
+  const content = await rawResponse.json();
+  //console.log('wtfffffffffffffffffffff');
+  //console.log(content);
+  return content;
+};
 class EmailList extends Component {
   constructor(props) {
     super(props);
@@ -17,10 +31,14 @@ class EmailList extends Component {
 
     this.handleChange = this.handleChange.bind(this);
   }
-
+  componentWillMount(){
+    FetchData(ipGetEmails)
+    .then()
+    .catch()
+  }
   handleChange(event){
     let content = event.target.value;
-    //console.log(content);
+    console.log(content);
     let arr = content.split('\n');
     this.setState({
       arr:arr
@@ -37,11 +55,11 @@ class EmailList extends Component {
     //console.log(this.state.arr);
     //console.log(emails);
     return (
-      <div class="card" >
+      <div className="card" >
       
-        <div class="card-body">
-          <h5 class="card-title">Danh sách Email</h5>
-          <TextareaAutosize class="form-control" value={emails} onChange={this.handleChange}/>
+        <div className="card-body">
+          <h5 className="card-title">Danh sách Email</h5>
+          <TextareaAutosize className="form-control" value={emails} onChange={this.handleChange}/>
           
         </div>
       </div>

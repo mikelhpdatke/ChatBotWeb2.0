@@ -1,6 +1,23 @@
 import React, { Component } from "react";
 import { Collapse } from "react-collapse";
-import {HuanFetch, FetchData} from './Home'
+const ipToGetEmail = 'http://172.104.41.68:5060/getQuestionAndAnswer';
+
+
+const FetchData = async (ip) => {
+  const rawResponse = await fetch(ip, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({})
+  });
+  const content = await rawResponse.json();
+  //console.log('wtfffffffffffffffffffff');
+  //console.log(content);
+  return content;
+};
+
 class AskAns extends Component {
   constructor(props) {
     super(props);
@@ -107,6 +124,9 @@ class AskAns extends Component {
   
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
+    FetchData(ipToGetEmail)
+    .then()
+    .catch()
   }
   
   updateWindowDimensions() {
@@ -141,22 +161,22 @@ class AskAns extends Component {
   }
   render() {
     return (
-      <div class="card" >
+      <div className="card" >
       
-        <div class="card-body" >
-        <h5 class="card-title">Câu hỏi</h5>
+        <div className="card-body" >
+        <h5 className="card-title">Câu hỏi</h5>
         <div style={{ height: this.state.height/3*1.7 + 'px', overflowY: "scroll" }}>
-          {this.state.arr.map(x => {
+          {this.state.arr.map((x, index) => {
             let rows = x.ans.length / 90 + 1;
             //console.log(x.ans);
             //console.log(rows);
             return (
-              <div id="accordion">
-                <div class="card">
-                  <div class="card-header" id={x.id + "x"}>
-                    <h5 class="mb-0">
+              <div id="accordion" key={index}>
+                <div className="card">
+                  <div className="card-header" id={x.id + "x"}>
+                    <h5 className="mb-0">
                       <p
-                        class="card-text"
+                        className="card-text"
                         style={{ fontSize: 15 }}
                         onClick={() => {
                           this.handleClick(x.pos);
@@ -174,7 +194,7 @@ class AskAns extends Component {
                         fontSize: 15,
                         width: "100%"
                       }}
-                      class="card-body"
+                      className="card-body"
                       rows={rows}
                       value={x.ans}
                       onChange={this.handleChange}

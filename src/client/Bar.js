@@ -75,6 +75,8 @@ class BarChart extends Component {
   let dataNotAnswered = [];
   fetch
     .then(ans => {
+      const tmpArr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+      if (!('rows' in ans)) return {dataAnswered:tmpArr, dataNotAnswered:tmpArr};
       let arr = ans.rows;
       for (let i = 0; i <= 9; i++) {
         let date = labels[i];

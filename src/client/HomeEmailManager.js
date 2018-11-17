@@ -67,20 +67,20 @@ class HomeEmailManager extends Component {
   render() {
    
     return (
-      <div class="container">
-        <div class="row justify-content-between">
-          <div class="col-8">
+      <div className="container">
+        <div className="row justify-content-between">
+          <div className="col-8">
             <EmailnQuestion onChange={this.handleChange}/>
           </div>
-          <div class="col">
+          <div className="col">
             <EmailList onChange={this.handleChange}/>
           </div>
         </div>
-        <div class="row justify-content-around">
+        <div className="row justify-content-around">
           <Button
             type="primary"
             onClick={this.handleSubmit}
-            size="Large"
+            size="large"
             style={{ marginTop: "20px" }}
           >
             Gửi Email

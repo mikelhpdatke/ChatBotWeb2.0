@@ -186,7 +186,7 @@ class Login extends Component {
           <button
             type="submit"
             
-            class="btn btn-primary btn-block btn-large"
+            className="btn btn-primary btn-block btn-large"
           >
             Login
           </button>
