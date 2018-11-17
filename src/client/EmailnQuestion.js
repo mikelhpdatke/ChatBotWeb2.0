@@ -102,6 +102,7 @@ class AskAns extends Component {
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
+    this.props.onChange("askAns", this.state.arr);
   }
   
   componentWillUnmount() {

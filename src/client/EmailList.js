@@ -28,6 +28,9 @@ class EmailList extends Component {
     //console.log(this.state);
     this.props.onChange('emailList', this.state.arr);
   }
+  componentDidMount(){
+    this.props.onChange('emailList', this.state.arr);
+  }
   render() {
     let emails = this.state.arr.join('\n');
     

@@ -5,6 +5,7 @@ import { Checkbox } from "antd";
 import EmailnQuestion from "./EmailnQuestion";
 import { Button } from "antd";
 import EmailList from "./EmailList";
+import {HuanFetch} from "./Home"
 const close = () => {
   console.log(
     "Notification was closed. Either the close button was clicked or duration time elapsed."
@@ -58,6 +59,7 @@ class HomeEmailManager extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state);
+    HuanFetch('http://localhost:8080/api/sendEmails', this.state);
   }
   render() {
    
