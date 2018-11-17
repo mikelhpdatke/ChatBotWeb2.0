@@ -17,7 +17,7 @@ const openNotification = () => {
   const btn = (
     <Button
       type="primary"
-      size="medium"
+      size="default"
       onClick={() => notification.close(key)}
     >
       Confirm
@@ -52,7 +52,8 @@ class HomeEmailManager extends Component {
     this.setState((state)=>{
       let oldState = state;
       oldState[key] = val;
-      //console.log(oldState);
+      console.log('in parenttt..');
+      console.log(oldState);
       return oldState;
     })
   }
