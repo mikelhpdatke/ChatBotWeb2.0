@@ -26,7 +26,7 @@ const openNotification = () => {
   notification.open({
     message: "Chú ý",
     description:
-      "Bạn đã nhập xong tất cả các câu hỏi, hay chuyển sang Tab Thống Kê để Trainning",
+      "Gửi Email thành công!",
     btn,
     key,
     onClose: close,
@@ -59,7 +59,10 @@ class HomeEmailManager extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    HuanFetch('http://localhost:8080/api/sendEmails', this.state);
+    HuanFetch('http://localhost:8080/api/sendEmails', this.state).then((res)=>{
+      console.log(res);
+      openNotification();
+    }).catch(err =>{console.log(err)});
   }
   render() {
    
