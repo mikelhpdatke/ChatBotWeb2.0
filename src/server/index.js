@@ -39,10 +39,10 @@ const sendEmails = async (toEmails, subject, content, html) => {
         res
       );
       if (err) {
-        reject('err');
+        reject("err");
       } else {
         console.log("tr");
-        resolve('ok');
+        resolve("ok");
       }
     });
   });
@@ -56,16 +56,21 @@ app.post("/api/sendEmails", jsonParser, function(req, res) {
     })
     .join("");
   console.log(htmlContent);
-  sendEmails(req.body.emailList, "hello Im chatbot", "abc", htmlContent)
+  let newArrEmail = [];
+  for (let i = 0; i < req.body.emailList.length; i++)
+    newArrEmail.push(req.body.emailList[i].Email);
+  console.log(newArrEmail);
+  sendEmails(newArrEmail, "hello Im chatbot", "abc", htmlContent)
     .then(ans => {
       res.status(200);
       console.log(ans);
-      res.send({"status":"ok"});
+      res.send({ status: "ok" });
     })
     .catch(err => {
       res.status(400);
+      console.log("error in sendEmail");
       console.log(err);
-      res.send({"status":"err"});
+      res.send({ status: "err" });
     });
 });
 app.listen(8080, () => console.log("Listening on port 8080!"));

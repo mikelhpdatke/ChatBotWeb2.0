@@ -422,6 +422,9 @@ class Home extends Component {
     }).then(ans => {
       console.log('Delete Success');
       console.log(ans);
+    }).catch(err => {
+      console.log('Delete Error');
+      console.log(err);
     });
     let nextPos = this.state.data.pos + 1;
     //console.log()
@@ -496,7 +499,7 @@ class Home extends Component {
       
 
 
-         <Button name='delete' type="danger" onClick={this.handleSubmit} size="default">
+         <Button name='delete' type="danger" onClick={this.handleDelete} size="default">
           Xoá 
         </Button>
 

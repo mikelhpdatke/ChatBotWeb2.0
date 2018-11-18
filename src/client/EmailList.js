@@ -19,31 +19,45 @@ class EmailList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      arr: [
-        "fishface550@yahoo.com",
-        "fishface57@hotmail.com",
-        "fishfacefool@yahoo.com",
-        "fishfactory22@yahoo.com",
-        "fishfad@yahoo.com",
-        "fishfan29@hotmail.com"
-      ]
+      arr: []
     };
 
     this.handleChange = this.handleChange.bind(this);
   }
   componentWillMount() {
     FetchData(ipGetEmails)
-      .then()
-      .catch();
+      .then(res => {
+        console.log("in Email fetch");
+        console.log(res);
+        if (!("rows" in res)) return Promise.reject("resnull");
+        let arr = res.rows;
+        for (let i = 0; i < arr.length; i++) {
+          let IdEmail = arr[i].IdEmail;
+          let Email = arr[i].Email;
+          this.setState(
+            state => ({
+              arr: [...this.state.arr, {IdEmail, Email}]
+            }),
+            () => {
+              console.log(this.state.arr);
+            }
+          );
+        }
+      })
+      .catch(err => {
+        console.log("get QA err");
+        console.log(err);
+      });
   }
   handleChange(event) {
     let content = event.target.value;
     console.log(content);
     let arr = content.split("\n");
     console.log(arr);
+    let newArr = arr.map((val, index)=>{return {IdEmail:index, Email:val}});
     this.setState(
       {
-        arr: arr
+        arr: newArr
       },
       () => {
         console.log("in childd");
@@ -56,7 +70,10 @@ class EmailList extends Component {
     this.props.onChange("emailList", this.state.arr);
   }
   render() {
-    let emails = this.state.arr.join("\n");
+    let newArrEmail = []
+    for(let i = 0; i < this.state.arr.length; i++)
+      newArrEmail.push(this.state.arr[i].Email);
+    let emails = newArrEmail.join("\n");
 
     //console.log(this.state.arr);
     //console.log(emails);

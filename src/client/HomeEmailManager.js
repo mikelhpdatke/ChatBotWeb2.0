@@ -52,8 +52,8 @@ class HomeEmailManager extends Component {
     this.setState((state)=>{
       let oldState = state;
       oldState[key] = val;
-      console.log('in parenttt..');
-      console.log(oldState);
+      //console.log('in parenttt..');
+      //console.log(oldState);
       return oldState;
     })
   }
