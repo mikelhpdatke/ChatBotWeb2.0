@@ -5,7 +5,7 @@ import { Checkbox } from "antd";
 import EmailnQuestion from "./EmailnQuestion";
 import { Button } from "antd";
 import EmailList from "./EmailList";
-import {HuanFetch} from "./Home"
+import { HuanFetch } from "./Home";
 const close = () => {
   console.log(
     "Notification was closed. Either the close button was clicked or duration time elapsed."
@@ -25,8 +25,7 @@ const openNotification = () => {
   );
   notification.open({
     message: "Chú ý",
-    description:
-      "Gửi Email thành công!",
+    description: "Gửi Email thành công!",
     btn,
     key,
     onClose: close,
@@ -34,47 +33,49 @@ const openNotification = () => {
   });
 };
 
-
 class HomeEmailManager extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      askAns:[],
-      emailList:[]
+      askAns: [],
+      emailList: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  
   handleChange(key, val) {
-    //console.log(key, val);
-    this.setState((state)=>{
+    console.log('onChange in EmailManager')
+    console.log(key, val);
+    this.setState(state => {
       let oldState = state;
       oldState[key] = val;
       //console.log('in parenttt..');
       //console.log(oldState);
       return oldState;
-    })
+    });
   }
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    HuanFetch('http://localhost:8080/api/sendEmails', this.state).then((res)=>{
-      console.log(res);
-      openNotification();
-    }).catch(err =>{console.log(err)});
+    HuanFetch("http://localhost:8080/api/sendEmails", this.state)
+      .then(res => {
+        console.log(res);
+        openNotification();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
   render() {
-   
     return (
       <div className="container">
         <div className="row justify-content-between">
           <div className="col-8">
-            <EmailnQuestion onChange={this.handleChange}/>
+            <EmailnQuestion onChange={this.handleChange} />
           </div>
           <div className="col">
-            <EmailList onChange={this.handleChange}/>
+            <EmailList onChange={this.handleChange} />
           </div>
         </div>
         <div className="row justify-content-around">

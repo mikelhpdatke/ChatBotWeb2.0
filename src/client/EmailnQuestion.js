@@ -55,6 +55,7 @@ class AskAns extends Component {
             }),
             () => {
               console.log(this.state.arr);
+              this.props.onChange("askAns", this.state.arr);
             }
           );
         }
@@ -86,6 +87,7 @@ class AskAns extends Component {
     this.props.onChange("askAns", this.state.arr);
     //console.log(this.state.arr[pos]);
   }
+
   handleClick(pos) {
     //let pos = event.target.name;
     console.log(pos);

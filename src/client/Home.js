@@ -54,10 +54,11 @@ class AskAns extends Component {
     if (name === "Question" || name === "Answer") {
       this.setState({ [name]: event.target.value }, () => {
         this.props.onChange(name, this.state[name]);
+        console.log(this.state);
       });
       //console.log('this is error');
       //console.log(event.target.value);
-      //console.log(this.state);
+      //
     }
   }
 
@@ -370,7 +371,7 @@ class Home extends Component {
     });
   }
   handleChange(key, val) {
-    console.log("llllll");
+    console.log("onUpdate AskAns");
     console.log(key, val);
     let newData = this.state.data;
     let pos = this.state.data.pos;

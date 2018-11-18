@@ -144,7 +144,7 @@ class ThongKe extends Component {
             data: [
               {
                 name: "Tổng số câu hỏi",
-                num: sum + 50000
+                num: sum + 61802
               },
               {
                 name: "Số câu hỏi mới trong ngày",

@@ -27,11 +27,11 @@ class EmailList extends Component {
   componentWillMount() {
     FetchData(ipGetEmails)
       .then(res => {
-        console.log("in Email fetch");
-        console.log(res);
+        //console.log("in Email fetch");
+        //console.log(res);
         if (!("rows" in res)) return Promise.reject("resnull");
         let arr = res.rows;
-        console.log(arr);
+        //console.log(arr);
         for (let i = 0; i < arr.length; i++) {
           let IdEmail = arr[i].IdEmail;
           let Email = arr[i].Email;
@@ -40,11 +40,12 @@ class EmailList extends Component {
               arr: [...this.state.arr, {IdEmail, Email}]
             }),
             () => {
+              this.props.onChange("emailList", this.state.arr);
               console.log(this.state.arr);
             }
           );
         }
-        console.log('okkkkkkkkkk');
+        //console.log('okkkkkkkkkk');
       })
       .catch(err => {
         console.log("get QA err");
@@ -53,9 +54,9 @@ class EmailList extends Component {
   }
   handleChange(event) {
     let content = event.target.value;
-    console.log(content);
+    //console.log(content);
     let arr = content.split("\n");
-    console.log(arr);
+    //console.log(arr);
     let newArr = arr.map((val, index)=>{return {IdEmail:index, Email:val}});
     this.setState(
       {
