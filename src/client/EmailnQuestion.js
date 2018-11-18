@@ -106,7 +106,10 @@ class AskAns extends Component {
               overflowY: "scroll"
             }}
           >
-            {this.state.arr.map((x, index) => {
+            {
+
+              this.state.arr.map((x, index) => {
+              if (x.ans == null) x.ans = "";
               let rows = x.ans.length / 90 + 1;
               //console.log(x.ans);
               //console.log(rows);

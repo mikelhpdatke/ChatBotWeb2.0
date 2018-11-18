@@ -31,6 +31,7 @@ class EmailList extends Component {
         console.log(res);
         if (!("rows" in res)) return Promise.reject("resnull");
         let arr = res.rows;
+        console.log(arr);
         for (let i = 0; i < arr.length; i++) {
           let IdEmail = arr[i].IdEmail;
           let Email = arr[i].Email;
@@ -43,6 +44,7 @@ class EmailList extends Component {
             }
           );
         }
+        console.log('okkkkkkkkkk');
       })
       .catch(err => {
         console.log("get QA err");
