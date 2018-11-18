@@ -60,7 +60,7 @@ app.post("/api/sendEmails", jsonParser, function(req, res) {
   for (let i = 0; i < req.body.emailList.length; i++)
     newArrEmail.push(req.body.emailList[i].Email);
   console.log(newArrEmail);
-  sendEmails(newArrEmail, "hello Im chatbot", "abc", htmlContent)
+  sendEmails(newArrEmail, "Cập nhật câu trả lời cho sinh viên", "etc.", htmlContent)
     .then(ans => {
       res.status(200);
       console.log(ans);
